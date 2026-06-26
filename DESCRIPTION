@@ -1,0 +1,16 @@
+Package: SpatialGPIRT
+Title: Spatial Item Response Theory Models via Gaussian Processes
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Mingya", "Huang", role = "aut"),
+    person("Soham", "Ghosh", email = "sghosh39@wisc.edu", role = c("aut", "cre"))
+  )
+Description: Provides tools for simulating and fitting spatial Item Response Theory (IRT) models. Specifically, it implements a binary 2-parameter logistic (2PL) model featuring anisotropic Gaussian Process (GP) priors to capture spatial dependencies in item difficulties. Estimation is performed via Hamiltonian Monte Carlo using 'cmdstanr'. For full methodological details, see the associated pre-print: <https://arxiv.org/abs/2507.09824>.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: 
+    cmdstanr,
+    MASS,
+    posterior
