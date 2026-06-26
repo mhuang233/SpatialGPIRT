@@ -10,7 +10,7 @@ You can install the development version of SpatialGPIRT from GitHub using the `r
 
 ```R
 # install.packages("remotes")
-remotes::install_github("YourUsername/SpatialGPIRT")
+remotes::install_github("mhuang233/SpatialGPIRT")
 
 ```
 
