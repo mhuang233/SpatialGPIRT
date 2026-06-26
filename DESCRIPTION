@@ -14,3 +14,5 @@ Imports:
     cmdstanr,
     MASS,
     posterior
+URL: https://github.com/ghoshstats/SpatialGPIRT
+BugReports: https://github.com/ghoshstats/SpatialGPIRT/issues
