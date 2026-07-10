@@ -78,9 +78,3 @@ If you use SpatialGPIRT, please cite the paper:
   url    = {https://arxiv.org/abs/2507.09824}
 }
 ```
-
-## Authors
-
-[Mingya Huang](https://mhuang233.github.io) (University of Chicago) and Soham Ghosh (University of Wisconsin--Madison).
-
-Issues and contributions are welcome via the [issue tracker](https://github.com/mhuang233/SpatialGPIRT/issues).
