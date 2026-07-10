@@ -9,7 +9,7 @@ The current release implements a binary two-parameter logistic (2PL) model with 
 - Anisotropic GP priors (Matérn family) on item difficulty over spatial coordinates
 - Simulation utilities for generating spatially dependent response data
 - Recovery metrics and posterior predictive accuracy out of the box
-- Stan backend: full posterior inference, not point estimates
+- Stan backend: full posterior inference, not just point estimates
 
 ## Installation
 
@@ -60,12 +60,6 @@ cat("Toy model classification accuracy:", round(accuracy, 4), "\n")
 ```
 
 Note: the toy settings (2 chains, 200/200 iterations) are for a quick installation check only. For real analyses, use longer chains and confirm convergence diagnostics.
-
-## Roadmap
-
-- Polytomous responses (graded-response extension, as developed in the paper)
-- Latent similarity spaces for items without geographic coordinates
-- Spatio-temporal extension (ST-IRT) for repeated assessments
 
 ## Citation
 
