@@ -1,45 +1,53 @@
 # SpatialGPIRT: Spatial Item Response Theory Models via Gaussian Processes
 
-**SpatialGPIRT** provides a computational framework for simulating and fitting spatial Item Response Theory (IRT) models. Currently, it implements a binary 2-parameter logistic (2PL) model featuring anisotropic Gaussian Process (GP) priors to capture spatial dependencies in item difficulties. However, this can be easily extended to multiple outcomes.
+**SpatialGPIRT** fits item response models in which item difficulties are spatially dependent. Standard IRT assumes local item independence; in many assessments, items close together in geography or in meaning behave alike, and that dependence carries information. SpatialGPIRT places an anisotropic Gaussian process (GP) prior on item difficulty, so the data decide how far the dependence reaches and whether it differs by direction.
 
-Model estimation is performed via Hamiltonian Monte Carlo (HMC) using [`cmdstanr`](https://www.google.com/search?q=%5Bhttps://mc-stan.org/cmdstanr/%5D(https://mc-stan.org/cmdstanr/)).
+The current release implements a binary two-parameter logistic (2PL) model with anisotropic GP priors on item difficulty. Estimation runs on Hamiltonian Monte Carlo via [`cmdstanr`](https://mc-stan.org/cmdstanr/).
+
+**Features**
+
+- Anisotropic GP priors (Matérn family) on item difficulty over spatial coordinates
+- Simulation utilities for generating spatially dependent response data
+- Recovery metrics and posterior predictive accuracy out of the box
+- Stan backend: full posterior inference, not point estimates
 
 ## Installation
 
-You can install the development version of SpatialGPIRT from GitHub using the `remotes` package:
+SpatialGPIRT requires a working CmdStan installation. If you have not used `cmdstanr` before, install both:
 
 ```R
 # install.packages("remotes")
 remotes::install_github("mhuang233/SpatialGPIRT")
 
+# one-time CmdStan setup, if needed
+# install.packages("cmdstanr", repos = c("https://stan-dev.r-universe.dev", getOption("repos")))
+# cmdstanr::install_cmdstan()
 ```
-
 
 ## Toy Example
 
-Run this to verify your installation.
+Run this to verify your installation (about a minute on a laptop):
 
 ```R
 # Load the package
 library(SpatialGPIRT)
 
-# Number of respondents (I) and spatial items (J) 
+# Number of respondents (I) and spatial items (J)
 sim_data <- simulate_sgp_irt_binary(
-  I = 50,    
-  J = 15,    
-  p = 1, # covariates
+  I = 50,
+  J = 15,
+  p = 1,   # covariates
   seed = 42
 )
 
 fit_results <- fit_sgp_irt_binary(
   stan_data = sim_data$stan_data,
-  chains = 2,              
+  chains = 2,
   parallel_chains = 2,
-  iter_warmup = 200,       
-  iter_sampling = 200,     
+  iter_warmup = 200,
+  iter_sampling = 200,
   seed = 42
 )
-
 
 post_means <- posterior_means_from_fit(fit_results)
 recovery_metrics <- compute_recovery_metrics(post_means, sim_data$truth)
@@ -49,11 +57,36 @@ prob_hat <- posterior_mean_probabilities(fit_results, sim_data$truth, ndraws = 1
 pred_y <- ifelse(prob_hat > 0.5, 1L, 0L)
 accuracy <- mean(pred_y == sim_data$truth$y)
 cat("Toy model classification accuracy:", round(accuracy, 4), "\n")
-
 ```
 
-## Reference
+Note: the toy settings (2 chains, 200/200 iterations) are for a quick installation check only. For real analyses, use longer chains and confirm convergence diagnostics.
 
-For full methodological details, formulations, and simulation studies, please see the associated pre-print:
+## Roadmap
 
-> **[Spatial Item Response Theory Models via Gaussian Processes](https://arxiv.org/abs/2507.09824)**
+- Polytomous responses (graded-response extension, as developed in the paper)
+- Latent similarity spaces for items without geographic coordinates
+- Spatio-temporal extension (ST-IRT) for repeated assessments
+
+## Citation
+
+If you use SpatialGPIRT, please cite the paper:
+
+> Huang, M., & Ghosh, S. (2025). Spatial Dependencies in Item Response Theory: Gaussian Process Priors for Geographic and Cognitive Measurement. arXiv:2507.09824. https://arxiv.org/abs/2507.09824
+
+```bibtex
+@misc{huang2025spatialgpirt,
+  title  = {Spatial Dependencies in Item Response Theory: Gaussian Process
+            Priors for Geographic and Cognitive Measurement},
+  author = {Huang, Mingya and Ghosh, Soham},
+  year   = {2025},
+  eprint = {2507.09824},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2507.09824}
+}
+```
+
+## Authors
+
+[Mingya Huang](https://mhuang233.github.io) (University of Chicago) and Soham Ghosh (University of Wisconsin--Madison).
+
+Issues and contributions are welcome via the [issue tracker](https://github.com/mhuang233/SpatialGPIRT/issues).
