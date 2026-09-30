@@ -2,8 +2,6 @@ source(file.path("config", "art_config.R"))
 source(file.path("R", "00_utils.R"))
 source_art_files(".")
 
-# These runs are intentionally separate and resumable. They reuse the same
-# deterministic respondent splits and anchor/target allocations.
 
 run_art_cv(
   config = art_config,
