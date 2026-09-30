@@ -1,3 +1,6 @@
+########################## Smoke testing and setting up the PLUS models ###########################################
+###################################################################################################################
+
 exact_plus_find_simulation_root <- function() {
   source_file <- tryCatch(
     normalizePath(sys.frame(1L)$ofile, winslash = "/", mustWork = TRUE),
