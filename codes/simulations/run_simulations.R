@@ -1,7 +1,4 @@
-# Production runner for the matched SGP-IRT simulation study.
-#
-# Run this file from the root of revision_simulation, or source it and call
-# run_simulation_study() explicitly.
+# Production runner for the SGP-IRT simulation study.
 
 if (!exists("simulate_irt_dgp", mode = "function")) {
   source(file.path("R", "simulation_framework.R"))
