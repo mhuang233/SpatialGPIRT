@@ -1,18 +1,9 @@
-# Add matched 1PLUS, 2PLUS, and 3PLUS models to the corrected ART analysis.
-#
-# Run this script from the top-level art_revision directory, after placing
-# psy.csv in data/psy.csv. Existing completed primary-CV and descriptive fits
-# are reused because art_config$skip_completed is TRUE by default.
+# Add matched 1PLUS, 2PLUS, and 3PLUS models to the ART analysis.
 #
 # Reporting labels:
 #   car_1pl = matched 1PLUS  (fixed item discrimination, no guessing)
 #   car_2pl = matched 2PLUS  (item discrimination, no guessing)
 #   car_3pl = matched 3PLUS  (item discrimination and item guessing)
-#
-# All three PLUS models use the same honest respondent splits, residual-MDS
-# coordinates, continuous standardized vocabulary covariate, proper CAR plus
-# nugget difficulty prior, identification, common priors, MCMC settings, and
-# held-out scoring code as the other ART competitors.
 
 source(file.path("config", "art_config.R"))
 source(file.path("R", "00_utils.R"))
@@ -230,9 +221,6 @@ write_plus_descriptive_outputs <- function(config) {
 }
 
 if (isTRUE(RUN_HONEST_CV)) {
-  # This uses the same run label as the completed primary analysis. With
-  # skip_completed = TRUE, existing independent-2PL, 2PLUS, and SGP-IRT
-  # fits are loaded/skipped; only missing 1PLUS and 3PLUS fits are sampled.
   run_art_cv(
     config = art_config,
     run_label = "primary_cv",
@@ -246,8 +234,6 @@ if (isTRUE(RUN_HONEST_CV)) {
 }
 
 if (isTRUE(RUN_HONEST_DESCRIPTIVE)) {
-  # Geometry and calibration respondents remain disjoint. Existing model fits
-  # in results/honest_descriptive are reused when present.
   run_honest_descriptive_analysis(
     config = art_config,
     models = comparison_models,
