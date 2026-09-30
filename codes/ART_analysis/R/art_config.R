@@ -3,8 +3,6 @@ art_config <- list(
   results_dir = "results",
   stan_dir = "stan",
 
-  # Reproduces the N = 321 cohort described in the current manuscript.
-  # Alternatives: "filter_flag" (N = 306 here), "all_complete" (N = 337).
   cohort_rule = "manuscript_321",
 
   genres = c(
@@ -31,7 +29,6 @@ art_config <- list(
   a_A = 2.0,
   b_A = 0.5,
 
-  # CmdStanR defaults for reportable fits.
   chains = 4L,
   parallel_chains = 4L,
   threads_per_chain = 1L,
