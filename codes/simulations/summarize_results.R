@@ -129,11 +129,7 @@ summarize_simulation_directory <- function(
   )
 }
 
-# Construct Appendix Table B.1 from replication-level SGP-IRT output.
-#
-# For a scalar parameter, each replication-level `bias` is the posterior-mean
-# error. The Monte Carlo RMSE is therefore sqrt(mean(bias^2)); averaging the
-# replication-level absolute errors would instead produce an MAE.
+
 summarize_table_B1 <- function(
     result_dir,
     output_file = file.path(result_dir, "summary", "table_B1_sgp.csv"),
