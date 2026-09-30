@@ -1,5 +1,3 @@
-# Core data-generating, fitting, diagnostic, and evaluation functions for the
-# reviewer-facing SGP-IRT simulation study.
 
 required_simulation_packages <- function() {
   pkgs <- c("cmdstanr", "posterior", "MASS", "deldir")
