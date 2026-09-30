@@ -1,6 +1,3 @@
-# Run from the top-level art_revision directory:
-#   source("scripts/05_regenerate_sgp_genre_icc_tic.R")
-#
 # The primary curves are conditional on vocabulary_z = 0, corresponding to a
 # respondent at the calibration-sample mean vocabulary score. For posterior
 # draw s and item j,
